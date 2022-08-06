@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router(); //for handling routing
 const questionController = require("../controller/questionController");
 
-router.post("/create", questionController.createQuestion);
+router.post("/submit",questionController.submitAnswers);
+// router.post("/create", questionController.createQuestion);
 router.get("/get",questionController.getAllQuestions);
 
 // router.post("/login", questionController.login);

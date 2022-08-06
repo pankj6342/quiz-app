@@ -18,6 +18,9 @@ const createQuestion = async (req, res) => {
     });
 
     const savedQuestion = await newquestion.save();
+    // const idx = Number(savedQuestion.correctOption);
+    // const correctOptionVal = savedQuestion.options[idx];
+
     res.json(savedQuestion);
   } catch (error) {
     console.error(error.message);
@@ -41,4 +44,34 @@ const getAllQuestions = async (req, res) => {
   }
 };
 
-module.exports = { createQuestion, getAllQuestions };
+const submitAnswers = async (req, res) => {
+  try {
+    let score = 0;
+    const quesList = await Question.find({
+      creator: {
+        name: "pankaj",
+        id: "1",
+      },
+    });
+
+    // console.log("backend", quesList);
+    const answerList = req.body.answerList;
+
+    if (answerList) {
+      Object.keys(answerList).forEach((qId) => {
+        const ansId = answerList[qId];
+        const q = quesList.find((e) => String(e._id) === qId);
+        const correctIndex = Number(q?.correctOption);
+        const correctAnsId = q?.options[correctIndex - 1]._id;
+        console.log({ ansId, correctAnsId });
+
+        if (ansId === String(correctAnsId)) score = score + 1;
+      });
+    }
+    res.json(score);
+  } catch (error) {
+    console.log({ submitAnswersError: error.message });
+  }
+};
+
+module.exports = { createQuestion, getAllQuestions, submitAnswers };

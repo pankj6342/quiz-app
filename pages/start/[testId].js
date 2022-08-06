@@ -8,7 +8,7 @@ const TestPage = () => {
     <></>
   ) : (
     <div>
-      <Test />
+      <Test testId={testId} />
     </div>
   );
 };

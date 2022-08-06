@@ -8,7 +8,7 @@ const CreateQuestions = () => {
     <></>
   ) : (
     <div>
-      <CreateQuestionsPage />
+      <CreateQuestionsPage testId={testId} />
     </div>
   );
 };

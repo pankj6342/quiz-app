@@ -14,10 +14,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const questionRoute = require("./routes/questionRoute");
+const testRoute = require("./routes/testRoute");
 const port = 5000;
 
 //Available Routes(for custom backend)
 app.use("/api/question", questionRoute);
+app.use("/api/test", testRoute);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
