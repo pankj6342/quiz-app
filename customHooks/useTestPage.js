@@ -6,11 +6,11 @@ export const useTestPage = () => {
   const host = 5000;
   const router = useRouter();
   const [questionArray, setQuestionArray] = useState([]);
-  const [answerList, setAnswerList] = useState({});
-  //pending: change this..
+  const [answerList, setAnswerList] = useState({}); //map quesToAns
   const [testId, setTestId] = useState(null);
   const [testList, setTestList] = useState([]);
   const [currTestData, setCurrTestData] = useState(null);
+  const [result, setResult] = useState();
 
   useEffect(() => {
     if (!testId) {
@@ -19,6 +19,10 @@ export const useTestPage = () => {
       console.log("set testid", testId);
     }
   }, []);
+
+  useEffect(() => {
+    if (result != null) router.push("/result", "/result", { shallow: true });
+  }, [result]);
 
   const createTest = async (data) => {
     try {
@@ -74,31 +78,6 @@ export const useTestPage = () => {
     }
   };
 
-  const createQuestion = async (data) => {
-    try {
-      //pending: make creator dynamic:
-
-      const resp = await axios.post(
-        `http://localhost:5000/api/question/create`,
-        {
-          index: data?.id,
-          title: data?.title,
-          description: data?.description,
-          correctOption: data?.correctOption,
-          options: data?.options,
-          creator: {
-            name: "pankaj",
-            id: "1",
-          },
-        }
-      );
-      console.log(resp.data);
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    }
-  };
-
   const fetchAllQuestions = async (testid) => {
     try {
       var query = "";
@@ -113,7 +92,7 @@ export const useTestPage = () => {
         );
         if (testid) setCurrTestData(testData?.data[0]);
         console.log("fetched", testData?.data[0]);
-        const questions = currTestData?.questions;
+        const questions = testData?.data[0]?.questions;
         // console.log(questions);
         setQuestionArray(questions);
       }
@@ -122,43 +101,39 @@ export const useTestPage = () => {
     }
   };
 
-  const saveAnswer = ({ qId, selected }) => {
-    console.log({ qId, selected });
-    setAnswerList({ ...answerList, [qId]: selected });
-    console.log({ answerList });
-    const toSave = answerList;
-    JSON.stringify(toSave);
-    console.log("stringify", toSave);
-    localStorage.setItem(testId, toSave);
+  const saveAnswer = () => {
+    let answers = answerList;
+    localStorage.setItem("answerList", JSON.stringify(answers));
+    console.log("local ", localStorage.getItem("answerList"));
   };
 
-  const onAnsSubmit = async () => {
+  const submitTest = async (testid) => {
     try {
-      //pending: make creator dynamic:
-
+      if (!testid) testid = testId;
       const resp = await axios.post(
-        `http://localhost:5000/api/question/submit`,
+        `http://localhost:5000/api/test/submit/?testId=${testid}`,
         {
           answerList,
         }
       );
-      console.log("score: ", resp.data);
-    } catch (err) {
-      // Handle Error Here
-      console.error({ ansSubmitError: err.message });
+      console.log("submit resp", resp?.data);
+      setResult(resp?.data);
+    } catch (error) {
+      console.log({ submitTestError: error.message });
     }
   };
 
   return {
     questionArray,
     fetchAllQuestions,
-    createQuestion,
     answerList,
+    setAnswerList,
     saveAnswer,
-    onAnsSubmit,
     createTest,
     updateTest,
     testList,
     fetchTest,
+    result,
+    submitTest,
   };
 };

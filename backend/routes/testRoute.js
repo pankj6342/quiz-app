@@ -8,4 +8,5 @@ const testController = require("../controller/testController");
 router.post("/update", testController.updateTest);
 router.get("/get", testController.getAllTest);
 router.post("/create", testController.createTest);
+router.post("/submit", testController.submitTest);
 module.exports = router;

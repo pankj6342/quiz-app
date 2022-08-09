@@ -4,7 +4,7 @@ const questionController = require("../controller/questionController");
 
 router.post("/submit",questionController.submitAnswers);
 // router.post("/create", questionController.createQuestion);
-router.get("/get",questionController.getAllQuestions);
+// router.get("/get",questionController.getAllQuestions);
 
 // router.post("/login", questionController.login);
 // router.post("/confirmEmail", questionController.confirmEmail);

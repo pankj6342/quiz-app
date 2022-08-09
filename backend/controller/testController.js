@@ -1,4 +1,3 @@
-const { isValidObjectId } = require("mongoose");
 const Test = require("../models/Test");
 const createTest = async (req, res) => {
   try {
@@ -31,55 +30,22 @@ const createTest = async (req, res) => {
     res.status(500).send("Error while adding a new test");
   }
 };
+
 //pending: make creator dynamic:
 
 const updateTest = async (req, res) => {
   try {
-    // const {
-    //   title,
-    //   description,
-    //   questions,
-    //   creator,
-    //   numQues,
-    //   startTime,
-    //   endTime,
-    // } = req.body;
     const data = req.body;
-    const newTest = {};
-
-    //fetch the new values from req and assign to newTest
-
-    // if (title) {
-    //   newTest.title = title;
-    // }
-    // if (description) {
-    //   newTest.description = description;
-    // }
-    // if (questions) {
-    //   newTest.questions = questions;
-    // }
-    // if (numQues) {
-    //   newTest.numQues = numQues;
-    // }
-    // if (startTime) {
-    //   newTest.startTime = startTime;
-    // }
-    // if (endTime) {
-    //   newTest.endTime = endTime;
-    // }
 
     //access the required note
     const testId = req?.query?.testId;
-    console.log("testId req", testId);
+    // console.log("testId req", testId);
     let test = await Test.findById(testId);
-    console.log("test", test, "questions", data.questions);
-    // let test = await Test.findById("62ece133a02ea9ba06b7f821");
+    // console.log("test", test, "questions", data.questions);
     //here id:
     //1. passed with the request as a parameter
     //2. id of the test stored and != user
-
     //if no test exists with this id:
-
     if (!test) {
       return res.status(404).send("test with given id Not Found");
     }
@@ -94,9 +60,10 @@ const updateTest = async (req, res) => {
 
     test = await Test.findOneAndUpdate(
       { _id: testId },
-      { $set: { questions: data.questions } },
+      { $set: data },
       { new: true }
     ); //this is syntax
+
     res.json(test);
   } catch (error) {
     console.error(error.message);
@@ -104,6 +71,30 @@ const updateTest = async (req, res) => {
   }
 };
 
+const submitTest = async (req, res) => {
+  try {
+    const testid = req?.query?.testId;
+    const testData = await Test.findById(testid);
+    const { answerList } = req.body;
+    // console.log("return", testData);
+    const qArray = testData?.questions;
+    // console.log({ qArray });
+    let score = 0;
+    qArray.forEach((q) => {
+      let qid = q._id;
+      console.log("elem", q);
+      const ans = String(answerList[qid]);
+      const correctOptionIndex = Number(q?.correctOption);
+      const correctOption = q?.options?.[correctOptionIndex - 1]?._id;
+      console.log({ ans, correctOption });
+      if (ans == String(correctOption)) score++;
+    });
+    res.json(score);
+  } catch (error) {
+    console.log({ BackendsubmitTestError: error.messgae });
+    res.status(500).send("backend error while submitTest" + error.message);
+  }
+};
 const getCreatedTest = async (req, res) => {
   try {
     //pending: make creator dynamic
@@ -155,4 +146,5 @@ module.exports = {
   getAllTest,
   updateTest,
   getTestData,
+  submitTest,
 };
