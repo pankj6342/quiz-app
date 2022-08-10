@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 const axios = require("axios");
 
 export const useTestPage = () => {
-  const host = 5000;
+  const port = process.env.PORT || 5000;
   const router = useRouter();
   const [questionArray, setQuestionArray] = useState([]);
   const [answerList, setAnswerList] = useState({}); //map quesToAns
