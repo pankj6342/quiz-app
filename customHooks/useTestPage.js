@@ -11,7 +11,10 @@ export const useTestPage = () => {
   const [testList, setTestList] = useState([]);
   const [currTestData, setCurrTestData] = useState(null);
   const [result, setResult] = useState();
-  const host = process.env.NODE_ENV !== "production" ? "${host}" : "";
+  const production = "";
+  const development = "http://localhost:5000/";
+  // const host = process.env.NODE_ENV ? production : development;
+  const host = "http://localhost:5000";
   useEffect(() => {
     if (!testId) {
       const id = router.query?.testId;
