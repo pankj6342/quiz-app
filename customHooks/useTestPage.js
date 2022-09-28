@@ -11,7 +11,7 @@ export const useTestPage = () => {
   const [testId, setTestId] = useState(null);
   const [testList, setTestList] = useState([]);
   const [currTestData, setCurrTestData] = useState(null);
-  const [result, setResult] = useState();
+  const [result, setResult] = useState(null);
   const production = "";
   // const development = `http://localhost:${port}`;
   const development = `https://quiznow-backend.herokuapp.com`;
@@ -27,7 +27,7 @@ export const useTestPage = () => {
   }, []);
 
   useEffect(() => {
-    if (result != null) router.push("/result", "/result", { shallow: true });
+    if (result) router.push("/result", "/result", { shallow: true });
   }, [result]);
 
   const createTest = async (data) => {
@@ -119,6 +119,7 @@ export const useTestPage = () => {
         }
       );
       console.log("submit resp", resp?.data);
+      var count = 3;
       setResult(resp?.data);
     } catch (error) {
       console.log({ submitTestError: error.message });
@@ -137,5 +138,6 @@ export const useTestPage = () => {
     fetchTest,
     result,
     submitTest,
+    setResult,
   };
 };
