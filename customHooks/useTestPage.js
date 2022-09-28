@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 const axios = require("axios");
 
 export const useTestPage = () => {
-  const port = process.env.PORT || 5000;
+  // const port = process.env.PORT || 5000;
 
   const router = useRouter();
   const [questionArray, setQuestionArray] = useState([]);
@@ -14,7 +14,7 @@ export const useTestPage = () => {
   const [result, setResult] = useState();
   const production = "";
   // const development = `http://localhost:${port}`;
-  const development = `https://quiznow-backend.herokuapp.com/`;
+  const development = `https://quiznow-backend.herokuapp.com`;
   console.log("env", process.env.ENV);
   // const host = process.env.ENV === "dev" ? development : production;
   const host = development;
