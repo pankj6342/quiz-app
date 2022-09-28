@@ -4,6 +4,7 @@ const axios = require("axios");
 
 export const useTestPage = () => {
   const port = process.env.PORT || 5000;
+
   const router = useRouter();
   const [questionArray, setQuestionArray] = useState([]);
   const [answerList, setAnswerList] = useState({}); //map quesToAns
@@ -12,9 +13,10 @@ export const useTestPage = () => {
   const [currTestData, setCurrTestData] = useState(null);
   const [result, setResult] = useState();
   const production = "";
-  const development = "https://localhost:5000";
-  const host = process.env.NODE_ENV === "dev" ? development : production;
-  // const host = "http://localhost:5000";
+  const development = `http://localhost:${port}`;
+  console.log("env", process.env.ENV);
+  // const host = process.env.ENV === "dev" ? development : production;
+  const host = "";
   useEffect(() => {
     if (!testId) {
       const id = router.query?.testId;
