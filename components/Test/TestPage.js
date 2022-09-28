@@ -12,7 +12,7 @@ export const Test = ({ testId }) => {
     submitTest,
   } = useTestPage();
 
-  const [qId, setQId] = useState();
+  const [qId, setQId] = useState(questionArray[0]?._id);
   const qIndex = questionArray?.findIndex((e) => String(e._id) == qId);
   const onLoad = async () => {
     // console.log("load");
