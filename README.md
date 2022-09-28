@@ -10,8 +10,10 @@
 ---
 >### Some screenshots:
 >#### PC version: 
->![Attempt Quiz](images/)
->![Post a quiz](images/)
+>![Attempt Quiz](media/0.png)
+>![Post a quiz](media/1.png)
+>![Post a quiz](media/2.png)
+>![Post a quiz](media/3.png)
 >
 >---
 > 
