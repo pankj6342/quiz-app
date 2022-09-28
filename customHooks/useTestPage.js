@@ -13,10 +13,11 @@ export const useTestPage = () => {
   const [currTestData, setCurrTestData] = useState(null);
   const [result, setResult] = useState();
   const production = "";
-  const development = `http://localhost:${port}`;
+  // const development = `http://localhost:${port}`;
+  const development = `https://quiznow-backend.herokuapp.com/`;
   console.log("env", process.env.ENV);
   // const host = process.env.ENV === "dev" ? development : production;
-  const host = "";
+  const host = development;
   useEffect(() => {
     if (!testId) {
       const id = router.query?.testId;
