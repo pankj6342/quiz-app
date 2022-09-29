@@ -26,11 +26,11 @@ export default function Home() {
             >
               Attempt a test
             </button>
-            <button className="bg-red-300 rounded-xl shadow-md p-2">
+            <button className="bg-red-300 rounded-xl shadow-md p-2"
               onClick=
               {() => {
                 router.push(`/create`);
-              }}
+              }}>
               Create a test
             </button>
           </div>
