@@ -1,5 +1,5 @@
 # Quiz App 
-<a href="quiznow-app.herokuapp.com">live project link</a>
+<a href="https://quiznow-app.herokuapp.com">live project link</a>
 ---
 > ### Features: 
 >- Attempt and host quizes
