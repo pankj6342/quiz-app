@@ -12,12 +12,9 @@ export const useTestPage = () => {
   const [testList, setTestList] = useState([]);
   const [currTestData, setCurrTestData] = useState(null);
   const [result, setResult] = useState(null);
-  const production = "";
-  // const development = `http://localhost:${port}`;
-  const development = `https://quiznow-backend.herokuapp.com`;
-  console.log("env", process.env.ENV);
-  // const host = process.env.ENV === "dev" ? development : production;
-  const host = development;
+
+  const host = `https://quiznow-backend.herokuapp.com`;
+
   useEffect(() => {
     if (!testId) {
       const id = router.query?.testId;
@@ -46,7 +43,9 @@ export const useTestPage = () => {
         startTime: data?.startTime,
         endTime: data?.endTime,
       });
-      setTestId(String(resp.data?._id));
+      let tId = String(resp.data?._id);
+      setTestId(tId);
+      router.push(`/create/${tId}`);
     } catch (err) {
       // Handle Error Here
       console.error(err);
@@ -66,8 +65,6 @@ export const useTestPage = () => {
 
   const updateTest = async ({ testId }, data) => {
     try {
-      // const { title, description, questions, numQues, startTime, endTime } =
-      //   data;
       console.log(testId, data);
       if (!testId) {
         testId = router.query?.testId;
@@ -95,7 +92,6 @@ export const useTestPage = () => {
         if (testid) setCurrTestData(testData?.data[0]);
         console.log("fetched", testData?.data[0]);
         const questions = testData?.data[0]?.questions;
-        // console.log(questions);
         setQuestionArray(questions);
       }
     } catch (error) {
@@ -135,6 +131,7 @@ export const useTestPage = () => {
     createTest,
     updateTest,
     testList,
+    currTestData,
     fetchTest,
     result,
     submitTest,

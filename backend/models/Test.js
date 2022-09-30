@@ -60,14 +60,14 @@ const TestSchema = new Schema({
     type: String,
     required: true,
   },
-  startTime: {
-    type: String,
-    required: true,
-  },
-  endTime: {
-    type: String,
-    required: true,
-  },
+  // startTime: {
+  //   type: String,
+  //   required: true,
+  // },
+  // endTime: {
+  //   type: String,
+  //   required: true,
+  // },
   date: {
     type: Date,
     default: Date.now,

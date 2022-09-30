@@ -18,7 +18,7 @@ export const ReviewModal = ({ setReviewModal }) => {
           </button>
           <button
             onClick={() => {
-              router.push(`/test/start/`);
+              router.push(`/start/`);
             }}
             className="bg-green-400 px-3 py-2 rounded-2xl"
           >

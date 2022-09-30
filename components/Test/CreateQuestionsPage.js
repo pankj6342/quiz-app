@@ -7,7 +7,8 @@ import { ReviewModal } from "./ReviewModal";
 export const CreateQuestionsPage = (testId) => {
   const [qList, setQList] = useState([]);
   const router = useRouter();
-
+  // const [testData, setTestData] = useState({});
+  const { currTestData } = useTestPage();
   useEffect(() => {
     if (!testId) {
       testId = router.query.testId;
@@ -32,7 +33,7 @@ export const CreateQuestionsPage = (testId) => {
     <div className="w-[90%] min-h-[60vh] m-auto shadow-md flex flex-col items-center">
       <div className="flex items-center w-full justify-between px-3">
         <div className="text-2xl uppercase text-center shadow-sm py-1 px-5">
-          Test Title
+          {currTestData?.title || "Create Test"}
         </div>
         <button
           onClick={() => {
@@ -80,7 +81,6 @@ const QCard = ({ data }) => {
     <div className="flex flex-col py-2 px-2 w-full border shadow-sm">
       <div className="flex w-full justify-between ">
         <div className="font-bold">{data.title}</div>
-        <div className="text-sm text-red-300"> edit/delete pending</div>
       </div>
       <div>
         {data.description.length > 100

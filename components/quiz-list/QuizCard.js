@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-export const QuizCard = ({ testId, title, creator, startTime, endTime }) => {
+export const QuizCard = ({ testId, title, creator }) => {
   const router = useRouter();
   return (
     <div className="flex items-center space-x-2 justify-between bg-white w-[600px] h-[100px] p-2 rounded-md shadow-md">
@@ -9,8 +9,7 @@ export const QuizCard = ({ testId, title, creator, startTime, endTime }) => {
       </div>
 
       <div className="flex text-sm space-x-3 items-center p-2">
-        Start Time: {startTime}
-        End Time : {endTime}
+
         <button
           onClick={() => {
             router.push(`/start/${testId}`);
@@ -19,6 +18,7 @@ export const QuizCard = ({ testId, title, creator, startTime, endTime }) => {
         >
           Start Now
         </button>
+        
       </div>
     </div>
   );

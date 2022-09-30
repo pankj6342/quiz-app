@@ -22,17 +22,7 @@ export const CreateQuestionsModal = ({ setShowModal, addQuesLocal }) => {
     const prev = state.options;
     const newOptions = prev;
     const val = { id: e.target.id, label: e.target.value };
-    newOptions[index - 1] = val;
-    // const replaceAt = index-1;
-    // const newOptions = [
-    //   ...prev.slice(0, replaceAt),
-    //   val,
-    //   ...prev.slice(replaceAt + 1),
-    // ];
-    // const prev = state.options;
-    // const updated = Object.assign([], prev, { [index - 1]: val });
-    //0 based indexing
-
+    newOptions[index] = val;
     setState({
       ...state,
       options: newOptions,
@@ -65,12 +55,12 @@ export const CreateQuestionsModal = ({ setShowModal, addQuesLocal }) => {
         />
         <button
           onClick={onSubmit}
-          disabled={
-            state.title &&
-            state.desciption &&
-            state.correctOption &&
-            state.options
-          }
+          // disabled={
+          //   true||state.title &&
+          //   state.description &&
+          //   state.correctOption &&
+          //   state.options
+          // }
           className="text-xl py-1 px-3 mt-2 bg-green-300 rounded-full"
         >
           Add Question
@@ -114,10 +104,10 @@ const QuestionCard = ({ state, onChange, onOptionChange }) => {
       </div>
 
       <div className="grid grid-cols-2 gap-x-20 items-between p-1">
+        <Option state={state} onOptionChange={onOptionChange} num={0} />
         <Option state={state} onOptionChange={onOptionChange} num={1} />
         <Option state={state} onOptionChange={onOptionChange} num={2} />
         <Option state={state} onOptionChange={onOptionChange} num={3} />
-        <Option state={state} onOptionChange={onOptionChange} num={4} />
       </div>
 
       <label>Correct Option</label>
@@ -142,7 +132,7 @@ const Option = ({ num, state, onOptionChange }) => {
   return (
     <>
       <div className="flex flex-col min-w-full">
-        <label className="">Option {num}</label>
+        <label className="">Option {num + 1}</label>
         <textarea
           id={num}
           onChange={onOptionChange}

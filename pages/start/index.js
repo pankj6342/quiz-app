@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { QuizCard } from "../../components/quiz-list/QuizCard.js";
 import { useTestPage } from "../../customHooks/useTestPage.js";
 
@@ -22,24 +22,22 @@ const Start = () => {
           id="test-list"
           className="min-w-full flex flex-col space-y-2 divide-y-2 items-center align-center border-white"
         >
-          {/* {testList.length === 0 ? (
+          {testList.length === 0 ? (
             <>No Active Test Available Currently</>
-          ) : ( */}
-          <>
-            {testList.map((e) => {
-              return (
-                <QuizCard
-                  testId={e._id}
-                  key={e._id}
-                  title={e.title}
-                  creator={e.creator.name}
-                  startTime={e.startTime}
-                  endTime={e.endTime}
-                />
-              );
-            })}
-          </>
-          {/* )} */}
+          ) : (
+            <>
+              {testList.map((e) => {
+                return (
+                  <QuizCard
+                    testId={e._id}
+                    key={e._id}
+                    title={e.title}
+                    creator={e.creator.name}
+                  />
+                );
+              })}
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -15,18 +15,10 @@ export const CreateTestPage = () => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
   const { createTest, testId } = useTestPage();
+
   const onSubmit = async (e) => {
     e.preventDefault();
     await createTest(state);
-    var timer = 4;
-
-    //pending: show loading screen here:
-    while (!testId && timer--) {}
-    if (timer == 0) {
-      alert("Error while creating qustion");
-      console.log("error while creating test");
-    }
-    router.push(`/create/${testId}`);
   };
 
   return (
@@ -78,49 +70,6 @@ export const CreateTestPage = () => {
                 onChange={onChange}
                 className=" block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 type="number"
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-wrap -mx-3 mb-6">
-            <div className="w-full px-3">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                Date of test
-              </label>
-              <input
-                value={state.date}
-                name="date"
-                onChange={onChange}
-                className=" block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                type="Date"
-              />
-            </div>
-          </div>
-          <div className="flex flex-wrap items-center justify-between mb-6">
-            <div className="w-[40%]">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                Start Time of Test
-              </label>
-              <input
-                value={state.startTime}
-                name="startTime"
-                required
-                onChange={onChange}
-                className=" block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                type="time"
-              />
-            </div>
-            <div className="w-[40%] ">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                End Time of Test
-              </label>
-              <input
-                value={state.endTime}
-                name="endTime"
-                required
-                onChange={onChange}
-                className=" block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                type="Time"
               />
             </div>
           </div>
