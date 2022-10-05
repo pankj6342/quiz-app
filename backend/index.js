@@ -1,6 +1,7 @@
 const connectToMongo = require("./db");
 const express = require("express");
 const bodyParser = require("body-parser");
+//middleware used for parsing json object.
 const morgan = require("morgan");
 const cors = require("cors");
 const dotenv = require("dotenv");

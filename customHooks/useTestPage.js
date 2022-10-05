@@ -23,9 +23,7 @@ export const useTestPage = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (result) router.push("/result", "/result", { shallow: true });
-  }, [result]);
+  useEffect(() => {}, []);
 
   const createTest = async (data) => {
     try {
@@ -115,8 +113,12 @@ export const useTestPage = () => {
         }
       );
       console.log("submit resp", resp?.data);
-      var count = 3;
-      setResult(resp?.data);
+      const res = resp?.data;
+      setResult(res);
+      setTimeout(() => {
+        if (res != null) 
+        router.push("/result");
+      }, 1000);
     } catch (error) {
       console.log({ submitTestError: error.message });
     }

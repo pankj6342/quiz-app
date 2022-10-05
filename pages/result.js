@@ -10,7 +10,7 @@ const Result = () => {
       <div className="w-[70%] h-[60%] text-3xl flex flex-col items-center space-y-8 text-center border shadow-md">
         <h2 className="text-green-400">Your Score is</h2>
         <h1 className="text-8xl">{result || 1}</h1>
-      </div>
+      </div>n
     </div>
   );
 };
