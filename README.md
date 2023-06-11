@@ -1,5 +1,5 @@
 # Quiz App 
-<a href="https://quiznow-app.herokuapp.com">live project link</a>
+<a href="https://quiz-app-pankj6342.netlify.app/">live project link</a>
 ---
 > ### Features: 
 >- Attempt and host quizes
