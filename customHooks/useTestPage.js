@@ -13,7 +13,7 @@ export const useTestPage = () => {
   const [currTestData, setCurrTestData] = useState(null);
   const [result, setResult] = useState(null);
 
-  const host = `https://quiznow-backend.herokuapp.com`;
+  const host = `https://quiznow-app-backend.vercel.app`;
 
   useEffect(() => {
     if (!testId) {
@@ -116,8 +116,7 @@ export const useTestPage = () => {
       const res = resp?.data;
       setResult(res);
       setTimeout(() => {
-        if (res != null) 
-        router.push("/result");
+        if (res != null) router.push("/result");
       }, 1000);
     } catch (error) {
       console.log({ submitTestError: error.message });
